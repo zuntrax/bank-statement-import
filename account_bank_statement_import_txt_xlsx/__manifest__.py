@@ -3,15 +3,16 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Account Bank Statement Import TXT/CSV/XLSX",
+    "name": "Account Bank Statement Import TXT/CSV/XLSX Sonderlocke",
     "summary": "Import TXT/CSV or XLSX files as Bank Statements in Odoo",
     "version": "12.0.2.0.5",
     "category": "Accounting",
-    "website": "https://github.com/OCA/bank-statement-import",
+    "website": "https://github.com/openanthill/bank-statement-import",
     "author":
         "ForgeFlow, "
         "CorporateHub, "
-        "Odoo Community Association (OCA)",
+        "Odoo Community Association (OCA), "
+        "OpenAnt",
     "maintainers": ["alexey-pelykh"],
     "license": "AGPL-3",
     "installable": True,
