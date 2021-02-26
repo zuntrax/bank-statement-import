@@ -176,6 +176,9 @@ class AccountBankStatementImportSheetMapping(models.Model):
         string='Bank Account column',
         help='Partner\'s bank account',
     )
+    bank_account_iban_from_description = fields.Boolean(
+        string='Parse bank account from description'
+    )
 
     @api.onchange('float_thousands_sep')
     def onchange_thousands_separator(self):

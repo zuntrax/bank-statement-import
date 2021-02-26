@@ -9,6 +9,7 @@ from decimal import Decimal
 from io import StringIO
 from os import path
 import itertools
+import re
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -267,6 +268,11 @@ class AccountBankStatementImportSheetParser(models.TransientModel):
                 line['bank_name'] = bank_name
             if bank_account is not None:
                 line['bank_account'] = bank_account
+            elif mapping.bank_account_iban_from_description:
+                m = re.search(r'IBAN: ([^\s]+)', description)
+                if m is not None:
+                    line['bank_account'] = m.group(1)
+
             lines.append(line)
         return lines
 
