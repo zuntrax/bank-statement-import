@@ -109,10 +109,14 @@ class AccountBankStatementImportSheetParser(models.TransientModel):
                 csv_options['delimiter'] = csv_delimiter
             if mapping.quotechar:
                 csv_options['quotechar'] = mapping.quotechar
-            csv_or_xlsx = reader(
-                StringIO(data_file.decode(mapping.file_encoding or 'utf-8')),
-                **csv_options
-            )
+
+            decoded = data_file.decode(mapping.file_encoding or 'utf-8')
+            if mapping.skip_lines_start or mapping.skip_lines_end:
+                start = mapping.skip_lines_start or 0
+                end = -mapping.skip_lines_end if mapping.skip_lines_end else None
+                decoded = '\n'.join(decoded.splitlines()[start:end])
+
+            csv_or_xlsx = reader(StringIO(decoded), **csv_options)
 
         if isinstance(csv_or_xlsx, tuple):
             header = [str(value) for value in csv_or_xlsx[1].row_values(0)]

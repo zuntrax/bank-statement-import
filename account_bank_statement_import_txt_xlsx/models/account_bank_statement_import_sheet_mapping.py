@@ -50,6 +50,20 @@ class AccountBankStatementImportSheetMapping(models.Model):
         ],
         default='utf-8',
     )
+    skip_lines_start = fields.Integer(
+        string='Skip lines at beginning',
+        help=(
+            'Amount of lines to skip in the beginning of the file before '
+            'trying to parse'
+        ),
+    )
+    skip_lines_end = fields.Integer(
+        string='Skip lines at end',
+        help=(
+            'Amount of lines to skip in the end of the file before '
+            'trying to parse'
+        ),
+    )
     delimiter = fields.Selection(
         string='Delimiter',
         selection=[
