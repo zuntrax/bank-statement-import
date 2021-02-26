@@ -76,6 +76,13 @@ class AccountBankStatementImportSheetMapping(models.Model):
         ],
         default='comma',
     )
+    header_relabel = fields.Char(
+        string='Relabel columns',
+        help=(
+            'Relabel columns, useful for missing column names. '
+            'For example "0:Timestamp,12:DebitCredit".'
+        ),
+    )
     quotechar = fields.Char(
         string='Text qualifier',
         size=1,

@@ -122,6 +122,10 @@ class AccountBankStatementImportSheetParser(models.TransientModel):
             header = [str(value) for value in csv_or_xlsx[1].row_values(0)]
         else:
             header = [value.strip() for value in next(csv_or_xlsx)]
+        if mapping.header_relabel:
+            for action in mapping.header_relabel.split(','):
+                colnum, _, name = action.partition(':')
+                header[int(colnum)] = name
         timestamp_column = header.index(mapping.timestamp_column)
         currency_column = header.index(mapping.currency_column) \
             if mapping.currency_column else None
