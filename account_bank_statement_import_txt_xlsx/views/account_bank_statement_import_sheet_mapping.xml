@@ -60,6 +60,12 @@
                         <field name="bank_name_column"/>
                         <field name="bank_account_column"/>
                     </group>
+                    <group string="Quirks">
+                        <field name='skip_lines_start'/>
+                        <field name='skip_lines_end'/>
+                        <field name='header_relabel'/>
+                        <field name='merge_description_keep_newlines'/>
+                    </group>
                 </sheet>
             </form>
         </field>
