@@ -204,6 +204,12 @@ class AccountBankStatementImportSheetParser(models.TransientModel):
             bank_account = values[bank_account_column] \
                 if bank_account_column is not None else None
 
+            if description and mapping.merge_description_keep_newlines is not None:
+                thresh = mapping.merge_description_keep_newlines
+                d_lines = description.splitlines()
+                d_lines = d_lines[:thresh] + ["".join(d_lines[thresh:])]
+                description = "\n".join(d_lines)
+
             if currency != currency_code:
                 continue
 

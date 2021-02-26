@@ -151,6 +151,14 @@ class AccountBankStatementImportSheetMapping(models.Model):
     description_column = fields.Char(
         string='Description column',
     )
+    merge_description_keep_newlines = fields.Integer(
+        string='Merge description lines',
+        help=(
+            'Amount of lines to keep spearate when mergin description lines. '
+            'Will not merge lines when not set.'
+        ),
+    )
+
     notes_column = fields.Char(
         string='Notes column',
     )
