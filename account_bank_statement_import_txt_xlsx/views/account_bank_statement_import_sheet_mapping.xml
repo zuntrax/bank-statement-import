@@ -28,16 +28,19 @@
                     </div>
                     <group>
                         <group>
-                            <field name="float_thousands_sep"/>
-                            <field name="float_decimal_sep"/>
-                        </group>
-                        <group>
                             <field name="file_encoding"/>
                             <field name="delimiter"/>
+                            <field name="float_thousands_sep"/>
+                            <field name="float_decimal_sep"/>
                             <field name="quotechar"/>
-                        </group>
-                        <group>
                             <field name="timestamp_format"/>
+                        </group>
+                        <group name="quirks">
+                            <field name='skip_lines_start'/>
+                            <field name='skip_lines_end'/>
+                            <field name='header_relabel'/>
+                            <field name='merge_description_keep_newlines'/>
+                            <field name='bank_account_iban_from_description'/>
                         </group>
                         <group attrs="{'invisible': [('debit_credit_column', '=', False)]}">
                             <field name="debit_value" attrs="{'required': [('debit_credit_column', '!=', False)]}"/>
@@ -59,13 +62,6 @@
                         <field name="partner_name_column"/>
                         <field name="bank_name_column"/>
                         <field name="bank_account_column"/>
-                    </group>
-                    <group string="Quirks">
-                        <field name='skip_lines_start'/>
-                        <field name='skip_lines_end'/>
-                        <field name='header_relabel'/>
-                        <field name='merge_description_keep_newlines'/>
-                        <field name='bank_account_iban_from_description'/>
                     </group>
                 </sheet>
             </form>

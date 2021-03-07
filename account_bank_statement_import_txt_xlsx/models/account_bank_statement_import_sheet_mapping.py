@@ -51,17 +51,19 @@ class AccountBankStatementImportSheetMapping(models.Model):
         default='utf-8',
     )
     skip_lines_start = fields.Integer(
-        string='Skip lines at beginning',
+        string='Skip prefix lines',
         help=(
-            'Amount of lines to skip in the beginning of the file before '
-            'trying to parse'
+            'If the csv file has a heading area upfront the lines representing the table with the actual '
+            'bank statement lines, enter the number of lines to skip at the beginning of the file here. '
+            'The parser will ignore this amount of lines at the beginning of the file when trying to parse.'
         ),
     )
     skip_lines_end = fields.Integer(
-        string='Skip lines at end',
+        string='Skip suffix lines',
         help=(
-            'Amount of lines to skip in the end of the file before '
-            'trying to parse'
+            'If the csv file has a suffix area below the lines representing the table with the actual '
+            'bank statement lines, enter the number of lines to skip at the end of the file here. '
+            'The parser will ignore this amount of lines at the end of the file when trying to parse.'
         ),
     )
     delimiter = fields.Selection(
@@ -79,8 +81,10 @@ class AccountBankStatementImportSheetMapping(models.Model):
     header_relabel = fields.Char(
         string='Relabel columns',
         help=(
-            'Relabel columns, useful for missing column names. '
-            'For example "0:Timestamp,12:DebitCredit".'
+            'Relabel columns when the csv file has columns with missing labels which cannot be mapped to '
+            'their column counter parts in the mapping. Use the number of the column and the desired label '
+            'For example "0:Timestamp,12:DebitCredit". Use the customized labels in the columns section to '
+            'include the customized columns in the parsing process.'
         ),
     )
     quotechar = fields.Char(
@@ -153,9 +157,10 @@ class AccountBankStatementImportSheetMapping(models.Model):
     )
     merge_description_keep_newlines = fields.Integer(
         string='Merge description lines',
-        help=(
-            'Amount of lines to keep spearate when mergin description lines. '
-            'Will not merge lines when not set.'
+        help=('In csv files where the description column contains line breaks, this field can be used '
+              'to deal with them. Left blank no merging of line breaks will happen. Set to 0 all line breaks '
+              'will be removed. Any number stands for the amount of line breaks which will be kept '
+              'counting from the beginning e.g. 1 will erase all line breaks after the first one.'
         ),
     )
 
@@ -177,7 +182,10 @@ class AccountBankStatementImportSheetMapping(models.Model):
         help='Partner\'s bank account',
     )
     bank_account_iban_from_description = fields.Boolean(
-        string='Parse bank account from description'
+        string='Parse IBAN from description',
+        help='In cases where the bank csv file contains the IBAN Account numbers from counterparts in '
+             'the description column, you can check this box and the number will be parsed from the '
+             'description and filled in the bank account column in the bank statement line.',
     )
 
     @api.onchange('float_thousands_sep')
